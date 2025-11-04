@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chord Progression Generator</title>
+    <script src="https://unpkg.com/tone@14.8.49/build/Tone.js"></script>
+    <link rel="stylesheet" href="1styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Diatonic Chord Progression Generator</h1>
+        <p>
+            Generate harmonically functional chord progressions in any key with analysis,
+            modulation, and audio playback using Tone.js.
+        </p>
+
+        <div class="controls">
+            <!-- Key and Quality -->
+            <div>
+                <label for="qualitySelect">Key Quality:</label>
+                <select id="qualitySelect">
+                    <option value="Major">Major</option>
+                    <option value="Minor">Minor</option>
+                </select>
+
+                <label for="keySelect">Key:</label>
+                <select id="keySelect"></select>
+            </div>
+
+            <!-- Length / Examples -->
+            <div>
+                <label for="numChords">Length (Chords):</label>
+                <input type="number" id="numChords" value="4" min="2" max="8">
+
+                <label for="numExamples">Examples:</label>
+                <input type="number" id="numExamples" value="3" min="1" max="5">
+            </div>
+
+            <!-- Tempo -->
+            <div>
+                <label for="tempoInput">Tempo (BPM):</label>
+                <input type="range" id="tempoInput" min="60" max="180" value="120"
+                       oninput="document.getElementById('tempoDisplay').textContent=this.value+' BPM'; setTempo();">
+                <span id="tempoDisplay">120 BPM</span>
+            </div>
+
+            <!-- Harmonic Complexity -->
+            <div>
+                <label for="harmonicStyle">Harmonic Complexity:</label>
+                <select id="harmonicStyle">
+                    <option value="Simple">Triads & 7ths Only (Simple)</option>
+                    <option value="Complex">All Extensions (Complex)</option>
+                </select>
+            </div>
+
+            <!-- Checkboxes -->
+            <div class="input-group checkbox-group">
+                <label>
+                    <input type="checkbox" id="modulationToggle">
+                    Enable Modulation (Key Changes)
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="checkbox" id="bassDropToggle" checked>
+                    Separate Bass Octave
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input type="checkbox" id="deceptiveCadence" checked>
+                    Deceptive Cadence (V → vi)
+                </label>
+            </div>
+
+            <!-- Generate Button -->
+            <button id="generateButton">Generate Progression</button>
+            <span id="audioStatus">Loading samples...</span>
+<button onclick="unlockAudio()">🎵 Unlock Audio</button>
+<span id="audio-status" style="margin-left: 10px; color: #0c0;">(waiting)</span>
+        </div>
+
+        <!-- Recording Controls -->
+        <div class="controls recording-controls">
+            <h2>Audio Recording</h2>
+            
+            <button id="recordButton" onclick="startRecording()" disabled>Start Recording</button>
+            <button id="stopButton" onclick="stopRecording()" disabled>Stop Recording</button>
+            <button id="downloadButton" onclick="downloadRecording()" disabled>Download WAV</button>
+            <span id="recordStatus">Ready.</span>
+        </div>
+
+        <!-- Output Sections -->
+        <div id="progressionOutput" class="results"></div>
+        <div id="analysisOutput" class="results"></div>
+    </div>
+
+    <!-- Scripts (must be last) -->
+
+
+
+    <script src="1musicLogic.js"></script>
+    <script src="100audioEngine.js"></script>
+    <script src="1uiController.js"></script>
+</body>
+</html>
